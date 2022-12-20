@@ -8,10 +8,10 @@ export class Comment {
     type!: CommentType;
     owner!: OwnerType;
     comment?: string;
-    created_at?: string;
-    created_by?: User;
-    pushed_at?: string;
-    pushed_by?: User;
-    updated_at?: string;
-    updated_by?: User;
+    createdAt?: string;
+    createdBy?: User;
+    pushedAt?: string;
+    pushedBy?: User;
+    updatedAt?: string;
+    updatedBy?: User;
 }

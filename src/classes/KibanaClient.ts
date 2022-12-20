@@ -13,7 +13,7 @@ export class KibanaClient {
     instance: AxiosInstance;
 
     constructor(config: KibanaConfig) {
-        let url: string = config.host + (config.space ? "s/" + config.space : "");
+        const url: string = config.host + (config.space ? "s/" + config.space : "");
         this.instance = axios.create({
             baseURL: url,
             auth: {
@@ -28,46 +28,46 @@ export class KibanaClient {
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-add-comment.html
-    addCommentToCase(case_id: string, comment_input: CommentInput): Promise<Case> {
+    addCommentToCase(caseId: string, commentInput: CommentInput): Promise<Case> {
         return new Promise(async (resolve, reject) => {
-            await this.instance.post("/api/cases/" + case_id + "/comments", comment_input).then((response: any) => {
+            await this.instance.post("/api/cases/" + caseId + "/comments", commentInput).then((response: any) => {
                 resolve(response.data as Case);
             }).catch((error: any) => reject(error.response.data));
         });
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-create.html
-    createCase(case_input: CaseInput): Promise<Case> {
+    createCase(caseInput: CaseInput): Promise<Case> {
         return new Promise<any>(async (resolve, reject) => {
-            await this.instance.post("/api/cases", case_input).then((response: any) => {
+            await this.instance.post("/api/cases", caseInput).then((response: any) => {
                 resolve(response.data);
             }).catch((error: any) => reject(error.response));
         });
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-cases.html
-    deleteCases(case_ids: Array<string>): Promise<boolean> {
+    deleteCases(caseIds: string[]): Promise<boolean> {
         return new Promise(async (resolve, reject) => {
-            let ids_list: string = "\"" + case_ids.join("\",\"") + "\"";
-            await this.instance.delete("/api/cases?ids=[" + ids_list + "]").then(() => {
+            const idsList: string = "\"" + caseIds.join("\",\"") + "\"";
+            await this.instance.delete("/api/cases?ids=[" + idsList + "]").then(() => {
                 resolve(true)
             }).catch((error: any) => reject(error.response.data));
         });
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-comments.html
-    deleteCommentFromCase(case_id: string, comment_id: string): Promise<boolean> {
+    deleteCommentFromCase(caseId: string, commentId: string): Promise<boolean> {
         return new Promise(async (resolve, reject) => {
-            await this.instance.delete("/api/cases/" + case_id + "/comments/" + comment_id).then(() => {
+            await this.instance.delete("/api/cases/" + caseId + "/comments/" + commentId).then(() => {
                 resolve(true)
             }).catch((error: any) => reject(error.response.data));
         });
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-comments.html
-    deleteAllCommentsFromCase(case_id: string): Promise<boolean> {
+    deleteAllCommentsFromCase(caseId: string): Promise<boolean> {
         return new Promise(async (resolve, reject) => {
-            await this.instance.delete("/api/cases/" + case_id + "/comments").then((response: any) => {
+            await this.instance.delete("/api/cases/" + caseId + "/comments").then((response: any) => {
                 resolve(true)
             }).catch((error: any) => reject(error.response.data));
         });
@@ -87,10 +87,10 @@ export class KibanaClient {
     // TODO https://www.elastic.co/guide/en/kibana/current/cases-api-find-connectors.html
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-alerts.html
-    getCaseAlerts(case_id: string): Promise<Array<Alert>> {
-        let alerts: Array<Alert> = new Array();
+    getCaseAlerts(caseId: string): Promise<Alert[]> {
+        const alerts: Alert[] = [];
         return new Promise(async (resolve, reject) => {
-            await this.instance.delete("/api/cases/" + case_id + "/comments").then((response: any) => {
+            await this.instance.delete("/api/cases/" + caseId + "/comments").then((response: any) => {
                 response.data.alerts.forEach((alert: Alert) => alerts.push(alert));
                 resolve(alerts);
             }).catch((error: any) => reject(error.response.data));
@@ -98,30 +98,30 @@ export class KibanaClient {
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-case.html
-    getCase(case_id: string, includeComments: boolean = true): Promise<Case> {
+    getCase(caseId: string, includeComments: boolean = true): Promise<Case> {
         return new Promise(async (resolve, reject) => {
-            await this.instance.get("/api/cases/" + case_id + "?includeComments=" + includeComments).then((response: any) => {
+            await this.instance.get("/api/cases/" + caseId + "?includeComments=" + includeComments).then((response: any) => {
                 resolve(response.data as Case);
             }).catch((error: any) => reject(error.response.data));
         });
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-status.html
-    getCaseStatus(case_id: string, owners?: Array<OwnerType>): Promise<CaseStatus> {
+    getCaseStatus(caseId: string, owners?: OwnerType[]): Promise<CaseStatus> {
         return new Promise(async (resolve, reject) => {
-            let owners_list: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
-            await this.instance.get("/api/cases/" + case_id + owners_list).then((response: any) => {
+            const ownersList: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
+            await this.instance.get("/api/cases/" + caseId + ownersList).then((response: any) => {
                 resolve(response.data as CaseStatus);
             }).catch((error: any) => reject(error.response.data));
         });
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-cases-by-alert.html
-    getCasesByAlert(alert_id: string, owners?: Array<OwnerType>): Promise<CaseStatus> {
+    getCasesByAlert(alertId: string, owners?: OwnerType[]): Promise<CaseStatus> {
         return new Promise(async (resolve, reject) => {
-            let cases: Array<{id: string, title: string}> = Array();
-            let owners_list: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
-            await this.instance.get("/api/cases/alerts/" + alert_id + owners_list).then((response: any) => {
+            const cases: {id: string, title: string}[] = [];
+            const ownersList: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
+            await this.instance.get("/api/cases/alerts/" + alertId + ownersList).then((response: any) => {
                 response.data.cases.forEach((c: {id: string, title: string}) => cases.push(c));
                 resolve(response.data as CaseStatus);
             }).catch((error: any) => reject(error.response.data));
@@ -129,9 +129,9 @@ export class KibanaClient {
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-comments.html
-    getCaseComment(case_id: string, comment_id: string): Promise<Comment> {
+    getCaseComment(caseId: string, commentId: string): Promise<Comment> {
         return new Promise(async (resolve, reject) => {
-            await this.instance.get("/api/cases/" + case_id + "/comments/" + comment_id).then((response: any) => {
+            await this.instance.get("/api/cases/" + caseId + "/comments/" + commentId).then((response: any) => {
                 resolve(response.data as Comment);
             }).catch((error: any) => reject(error.response.data));
         });
@@ -140,11 +140,11 @@ export class KibanaClient {
     // TODO https://www.elastic.co/guide/en/kibana/current/cases-get-configuration.html
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-comments.html
-    getReporters(owners?: Array<OwnerType>): Promise<Array<User>> {
-        let reporters: Array<User> = Array();
+    getReporters(owners?: OwnerType[]): Promise<User[]> {
+        const reporters: User[] = [];
         return new Promise(async (resolve, reject) => {
-            let owners_list: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
-            await this.instance.get("/api/cases/reporters" + owners_list).then((response: any) => {
+            const ownersList: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
+            await this.instance.get("/api/cases/reporters" + ownersList).then((response: any) => {
                 response.data.forEach((u: User) => reporters.push(u));
                 resolve(reporters);
             }).catch((error: any) => reject(error.response.data));
@@ -152,10 +152,10 @@ export class KibanaClient {
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-tag.html
-    getTags(owners?: Array<OwnerType>): Promise<Array<string>> {
+    getTags(owners?: OwnerType[]): Promise<string[]> {
         return new Promise(async (resolve, reject) => {
-            let owners_list: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
-            await this.instance.get("/api/cases/tags" + owners_list).then((response: any) => {
+            const ownersList: string = owners ? "?owner=[\"" + owners.join("\",\"") + "\"]" : "";
+            await this.instance.get("/api/cases/tags" + ownersList).then((response: any) => {
                 resolve(response.data);
             }).catch((error: any) => reject(error.response.data));
         });

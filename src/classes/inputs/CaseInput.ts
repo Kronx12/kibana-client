@@ -4,12 +4,12 @@ import { ConnectorInput } from "./ConnectorInput";
 import { SettingsInput } from "./SettingsInput";
 
 export class CaseInput {
-    assignees: Array<string> = Array<string>();
+    assignees: string[] = [];
     connector!: ConnectorInput;
     description!: string;
     owner!: OwnerType;
     settings!: SettingsInput;
     severity?: Severity;
-    tags: Array<string> = Array<string>();
+    tags: string[] = [];
     title!: string;
 }
