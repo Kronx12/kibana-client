@@ -1,13 +1,13 @@
-import { KibanaConfig } from '../classes/KibanaConfig';
-import { KibanaClient } from '../classes/KibanaClient';
-import { CaseInput } from '../classes/inputs/CaseInput';
-import { OwnerType } from '../enums/OwnerType';
-import { Severity } from '../enums/Severity';
-import { ConnectorType } from '../enums/ConnectorType';
-import { Case } from '../classes/Case';
-import { CommentInput } from '../classes/inputs/CommentInput';
-import { CommentType } from '../enums/CommentType';
-import { Comment } from '../classes/Comment';
+// import { KibanaConfig } from '../classes/KibanaConfig';
+// import { KibanaClient } from '../classes/KibanaClient';
+// import { CaseInput } from '../classes/inputs/CaseInput';
+// import { OwnerType } from '../enums/OwnerType';
+// import { Severity } from '../enums/Severity';
+// import { ConnectorType } from '../enums/ConnectorType';
+// import { Case } from '../classes/Case';
+// import { CommentInput } from '../classes/inputs/CommentInput';
+// import { CommentType } from '../enums/CommentType';
+// import { Comment } from '../classes/Comment';
 
 jest.setTimeout(999999)
 
@@ -16,9 +16,9 @@ test('KibanaClient', async () => {
 	// let config: KibanaConfig = new KibanaConfig("", "", "", "")
 	// let client: KibanaClient = new KibanaClient(config);
 	
-	// // await client.getCase("a028f400-7fb5-11ed-bebb-c745640a722d").then((cases: Case) => {
-	// // 	console.log(cases);
-	// // })
+	// await client.getCase("a028f400-7fb5-11ed-bebb-c745640a722d").then((cases: Case) => {
+	// 	console.log(cases);
+	// })
 
 	// let new_case: CaseInput = {
 	// 	assignees: [],
