@@ -19,7 +19,13 @@
     "type": "git",
     "url": "git+https://github.com/Kronx12/kibana-client.git"
   },
-  "keywords": [],
+  "keywords": [
+    "kibana",
+    "client",
+    "api",
+    "elastic",
+    "security"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
