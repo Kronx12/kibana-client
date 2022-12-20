@@ -6,40 +6,40 @@
 
 ```typescript
 // https://www.elastic.co/guide/en/kibana/current/cases-api-add-comment.html
-addCommentToCase(caseId: string, commentInput: CommentInput): Promise<Case> {
+addCommentToCase(caseId: string, commentInput: CommentInput): Promise<Case>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-create.html
-createCase(caseInput: CaseInput): Promise<Case> {
+createCase(caseInput: CaseInput): Promise<Case>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-cases.html
-deleteCases(caseIds: string[]): Promise<boolean> {
+deleteCases(caseIds: string[]): Promise<boolean>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-comments.html
-deleteCommentFromCase(caseId: string, commentId: string): Promise<boolean> {
+deleteCommentFromCase(caseId: string, commentId: string): Promise<boolean>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-comments.html
-deleteAllCommentsFromCase(caseId: string): Promise<boolean> {
+deleteAllCommentsFromCase(caseId: string): Promise<boolean>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-alerts.html
-getCaseAlerts(caseId: string): Promise<Alert[]> {
+getCaseAlerts(caseId: string): Promise<Alert[]>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-case.html
-getCase(caseId: string, includeComments: boolean = true): Promise<Case> {
+getCase(caseId: string, includeComments: boolean = true): Promise<Case>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-status.html
-getCaseStatus(caseId: string, owners?: OwnerType[]): Promise<CaseStatus> {
+getCaseStatus(caseId: string, owners?: OwnerType[]): Promise<CaseStatus>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-cases-by-alert.html
-getCasesByAlert(alertId: string, owners?: OwnerType[]): Promise<CaseStatus> {
+getCasesByAlert(alertId: string, owners?: OwnerType[]): Promise<CaseStatus>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-comments.html
-getCaseComment(caseId: string, commentId: string): Promise<Comment> {
+getCaseComment(caseId: string, commentId: string): Promise<Comment>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-comments.html
-getReporters(owners?: OwnerType[]): Promise<User[]> {
+getReporters(owners?: OwnerType[]): Promise<User[]>
 
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-tag.html
-getTags(owners?: OwnerType[]): Promise<string[]> {
+getTags(owners?: OwnerType[]): Promise<string[]>
 ```
 
 ### Examples :
