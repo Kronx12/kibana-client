@@ -69,16 +69,16 @@ export class KibanaClient {
     // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-comments.html
     deleteAllCommentsFromCase(caseId: string): Promise<boolean> {
         return new Promise(async (resolve, reject) => {
-            await this.instance.delete("/api/cases/" + caseId + "/comments").then((response: any) => {
+            await this.instance.delete("/api/cases/" + caseId + "/comments").then(() => {
                 resolve(true)
             }).catch((error: any) => reject(error.response.data));
         });
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-find-cases.html
-    findCases(findCasesQuery: FindCasesQuery): Promise<Array<Case>> {
+    findCases(findCasesQuery: FindCasesQuery): Promise<Case[]> {
         return new Promise(async (resolve, reject) => {
-            let cases: Array<Case> = Array<Case>();
+            const cases: Case[] = [];
             await this.instance.get("/api/cases/_find" + build(findCasesQuery)).then((response: any) => {
                 response.data.cases.forEach((c: Case) => cases.push(c));
             }).catch((error: any) => reject(error.response.data));
@@ -87,9 +87,9 @@ export class KibanaClient {
     }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-find-connectors.html
-    findConnectors(): Promise<Array<Connector>> {
+    findConnectors(): Promise<Connector[]> {
         return new Promise(async (resolve, reject) => {
-            let connectors: Array<Connector> = Array<Connector>();
+            const connectors: Connector[] = [];
             await this.instance.get("/api/cases/configure/connectors/_find").then((response: any) => {
                 response.data.forEach((c: Connector) => connectors.push(c));
             }).catch((error: any) => reject(error.response.data));
