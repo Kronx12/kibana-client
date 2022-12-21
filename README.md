@@ -20,6 +20,12 @@ deleteCommentFromCase(caseId: string, commentId: string): Promise<boolean> {}
 // https://www.elastic.co/guide/en/kibana/current/cases-api-delete-comments.html
 deleteAllCommentsFromCase(caseId: string): Promise<boolean> {}
 
+// https://www.elastic.co/guide/en/kibana/current/cases-api-find-cases.html
+findCases(findCasesQuery: FindCasesQuery): Promise<Case[]> {}
+
+// https://www.elastic.co/guide/en/kibana/current/cases-api-find-connectors.html
+findConnectors(): Promise<Connector[]> {}
+
 // https://www.elastic.co/guide/en/kibana/current/cases-api-get-alerts.html
 getCaseAlerts(caseId: string): Promise<Alert[]> {}
 
