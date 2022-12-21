@@ -4,8 +4,10 @@ import { Alert } from './Alert';
 import { Case } from './Case';
 import { CaseStatus } from './CaseStatus';
 import { Comment } from './Comment';
+import { Connector } from './Connector';
 import { CaseInput } from './inputs/CaseInput';
 import { CommentInput } from './inputs/CommentInput';
+import { build, FindCasesQuery } from './inputs/FindCasesQuery';
 import { KibanaConfig } from './KibanaConfig';
 import { User } from './User';
 
@@ -73,18 +75,27 @@ export class KibanaClient {
         });
     }
 
-    // TODO https://www.elastic.co/guide/en/kibana/current/cases-api-find-cases.html
-    // getCases(): Promise<Array<Case>> {
-    //     return new Promise(async (resolve, reject) => {
-    //         let cases: Array<Case> = Array<Case>();
-    //         await this.instance.get("/api/cases/_find").then((response: any) => {
-    //             response.data.cases.forEach((c: Case) => cases.push(c));
-    //         }).catch((error: any) => reject(error.response.data));
-    //         resolve(cases);
-    //     });
-    // }
+    // https://www.elastic.co/guide/en/kibana/current/cases-api-find-cases.html
+    findCases(findCasesQuery: FindCasesQuery): Promise<Array<Case>> {
+        return new Promise(async (resolve, reject) => {
+            let cases: Array<Case> = Array<Case>();
+            await this.instance.get("/api/cases/_find" + build(findCasesQuery)).then((response: any) => {
+                response.data.cases.forEach((c: Case) => cases.push(c));
+            }).catch((error: any) => reject(error.response.data));
+            resolve(cases);
+        });
+    }
 
-    // TODO https://www.elastic.co/guide/en/kibana/current/cases-api-find-connectors.html
+    // https://www.elastic.co/guide/en/kibana/current/cases-api-find-connectors.html
+    findConnectors(): Promise<Array<Connector>> {
+        return new Promise(async (resolve, reject) => {
+            let connectors: Array<Connector> = Array<Connector>();
+            await this.instance.get("/api/cases/configure/connectors/_find").then((response: any) => {
+                response.data.forEach((c: Connector) => connectors.push(c));
+            }).catch((error: any) => reject(error.response.data));
+            resolve(connectors);
+        });
+    }
 
     // https://www.elastic.co/guide/en/kibana/current/cases-api-get-alerts.html
     getCaseAlerts(caseId: string): Promise<Alert[]> {

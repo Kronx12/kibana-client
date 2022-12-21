@@ -5,8 +5,8 @@ export class KibanaConfig {
     password: string;
 
     constructor(host: string, username: string, password: string, space?: string)
-    {  
-        this.host = host;
+    {
+        this.host = host + (host.endsWith("/") ? "" : "/");
         this.space = space;
         this.username = username;
         this.password = password;

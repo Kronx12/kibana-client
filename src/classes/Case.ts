@@ -1,6 +1,6 @@
 import { Severity } from "../enums/Severity";
 import { Comment } from "./Comment";
-import { Connector } from "./Connector";
+import { CaseConnector } from "./CaseConnector";
 import { Settings } from "./Settings";
 import { User } from "./User";
 
@@ -25,6 +25,6 @@ export class Case {
     status!: string;
     updatedAt!: string;
     updatedBy?: User;
-    connector!: Connector;
+    connector!: CaseConnector;
     externalService: any; // TODO Class ?
 }
