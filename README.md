@@ -80,7 +80,7 @@ await client.createCase(newCase).then(async value => {
 
 	// Delete the case:
 	const caseId = value.id;
-	await client.deleteCases([case_id]).then((r: boolean) = {
+	await client.deleteCases([case_id]).then((r: boolean) => {
 		console.log(`Delete case ${case_id}`);
 	}).catch(e => console.log(e));
 }).catch(e => console.log(e));
